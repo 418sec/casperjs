@@ -645,7 +645,6 @@ function mergeObjectsInGecko(origin, add, opts) {
         keepReferences = options.keepReferences;
     
     // Fix prototype pollution freezing the *origin* Object
-    Object.freeze(origin.__proto__);
     Object.freeze(origin);
 
     for (var p in add) {
