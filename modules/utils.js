@@ -690,7 +690,13 @@ function mergeObjects(origin, add, opts) {
         return mergeObjectsInGecko(origin, add, options);
     }
 
+    // Prototype pollution mitigation
     for (var p in add) {
+        var key =  String(Object.keys(add));
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+            return origin;
+        }
+
         if (add[p] && add[p].constructor === Object) {
             if (origin[p] && origin[p].constructor === Object) {
                 origin[p] = mergeObjects(origin[p], add[p]);
